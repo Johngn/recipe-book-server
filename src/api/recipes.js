@@ -4,9 +4,15 @@ const Recipe = require('../models/Recipe.js');
 
 const router = Router();
 
+const { API_KEY } = process.env;
+
 // CREATE A RECIPE
 router.post('/', async (req, res, next) => {
   try {
+    if (req.get('x-api-key') !== API_KEY) {
+      res.status(401);
+      throw new Error('Unauthorised');
+    }
     const recipe = new Recipe(req.body);
     const createdRecipe = await recipe.save();
     res.json(createdRecipe);

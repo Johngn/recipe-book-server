@@ -4,10 +4,10 @@ const helmet = require('helmet');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-require('dotenv').config();
-
 const middlewares = require('./middlewares');
 const recipes = require('./api/recipes');
+
+require('dotenv').config();
 
 const app = express();
 
